@@ -1,4 +1,4 @@
-package sailpoint;
+package com.sailpoint;
 
 import bsh.EvalError;
 import bsh.Interpreter;

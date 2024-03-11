@@ -1,8 +1,14 @@
-package sailpoint;
+package com.sailpoint;
 
 import com.jayway.jsonpath.JsonPath;
+
 import net.minidev.json.JSONArray;
 
+//      import org.json.JSONArray;
+//      import org.json.JSONException;
+//      import org.json.JSONObject;
+
+ 
 
 public class jsonPath {
     public static void main(String[] args) throws InterruptedException {
@@ -18,7 +24,7 @@ public class jsonPath {
 	//businessEmail = businessEmail.replace("[\"", "");
 	//businessEmail = businessEmail.replace("\"]", "");
  	//System.out.println("businessEmail (31768) : " + businessEmail);
-	JSONArray jsonarray = JsonPath.read(resbody,emailAddressJsonPath);
+	JSONArray jsonarray = JsonPath.read(resbody, emailAddressJsonPath);
 	System.out.println("jsonarray size = "+jsonarray.size());
 	String emails=null;
 	if (jsonarray.size()>0){

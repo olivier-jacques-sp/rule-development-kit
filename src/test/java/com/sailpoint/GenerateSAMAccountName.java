@@ -1,4 +1,4 @@
-package sailpoint;
+package com.sailpoint;
 
 import sailpoint.api.*;
 import sailpoint.object.*;
