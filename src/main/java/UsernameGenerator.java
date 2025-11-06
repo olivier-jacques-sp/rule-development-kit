@@ -47,12 +47,17 @@ public class UsernameGenerator {
         String fullName = firstName + "." + lastName;
 
         if(fullName.length() > MAX_USERNAME_LENGTH) {
-            int firstNameLength = firstName.length();
-
+             int firstNameLength =1;
+             if(firstName !=null){
+                firstNameLength = firstName.length();
+            }
             if(firstNameLength > (MAX_USERNAME_LENGTH - 2)) {
                 for(int lastNameLength = 0; lastNameLength < lastName.length(); lastNameLength++) {
-                    username = firstName.substring(0, (MAX_USERNAME_LENGTH - 2)) + "." + lastName.charAt(lastNameLength);
-                    username = username.toLowerCase();
+                    if (firstName !=null && username !=null) {
+                        username = firstName.substring(0, (MAX_USERNAME_LENGTH - 2)) + "." + lastName.charAt(lastNameLength);
+                        username = username.toLowerCase();
+                    }
+                    
                     if (isUnique(username)) {
                         log.debug( "AD Create User Name | Unique username generated: " + username);
                         log.debug( "AD Create User Name | Exit from the  GenerateUsername Method" );

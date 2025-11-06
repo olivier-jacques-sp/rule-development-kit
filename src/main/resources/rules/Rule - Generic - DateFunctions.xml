@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule name="DateFunctions">
+    <Description>
+        This rule performs an array of date functions.
+    </Description>
+    <Signature returnType='String'>
+        <Inputs>
+            <Argument name='dateArray' type='String'>
+                <Description>
+                    The dates to operate on separated by a comma
+                </Description>
+            </Argument>
+            <Argument name='inputFormat' type='String'>
+                <Description>
+                    The format of the dates in the dateArray.
+                </Description>
+            </Argument>
+            <Argument name='outputFormat' type='String'>
+                <Description>
+                    The date format you wish the rule to return.
+                </Description>
+            </Argument>
+            <Argument name='operation' type='String'>
+                <Description>
+                    The operation you wish the date functions rule to perform.
+                </Description>
+            </Argument>
+        </Inputs>
+    </Signature>
+    <Source><![CDATA[
+    import java.text.SimpleDateFormat;
+    import java.util.List;
+    import java.util.ArrayList;
+    import java.util.Arrays;
+    import java.util.stream.Collectors;
+    import sailpoint.tools.Util;
+   
+    String getFarthestDate(List dateArrayList){
+        String farthestDate = null;
+        for(String date:dateArrayList){
+            if (Util.isNullOrEmpty(farthestDate)) {
+                farthestDate = date;
+            } else if(sdfIn.parse(date).after(sdfIn.parse(farthestDate))) {
+                farthestDate = date;
+            }
+        }
+        return sdfOut.format(sdfIn.parse(farthestDate));   
+    }
+
+    String getNearestDate(List dateArrayList){
+        String nearestDate = null;
+        for(String date:dateArrayList){
+            if (Util.isNullOrEmpty(nearestDate)) {
+                nearestDate = date;
+            } else if(sdfIn.parse(date).before(sdfIn.parse(nearestDate))) {
+                nearestDate = date;
+            }
+        }
+        return sdfOut.format(sdfIn.parse(nearestDate));   
+    }
+
+    log.debug("DevRelGenericRule" + dateArray);
+    String[] dates = dateArray.split(",");
+    List dateArrayList = Arrays.asList(dates);
+    String inputFormat = inputFormat;
+    String outputFormat = outputFormat;
+    String operation = operation;
+        
+    log.debug("Input Format " + inputFormat);
+    log.debug("OutInput Format " + outputFormat);
+
+    SimpleDateFormat sdfIn = new SimpleDateFormat(inputFormat);
+    SimpleDateFormat sdfOut = new SimpleDateFormat(outputFormat);
+
+    switch(operation) {
+    case "getFarthestDate":
+        return getFarthestDate(dateArrayList);
+    case "getNearestDate":
+        return getNearestDate(dateArrayList);
+    default:
+        return null;
+    }
+
+
+
+  ]]></Source>
+</Rule>
